@@ -15,13 +15,12 @@ let currentFileName = expand('%:t')
 let commitNumber = substitute(system("git log --after=\"".dateString."\" --reverse | head -1 | sed 's/commit//g'"), "\n*$", '', '')
 let window_name = " ".currentFileName." ".commitNumber." "
 "echo "WINDOW NAME: ".window_name
-
 "echo "OUTPUT_STRING: ".outputString
 "echo "dateString: ".dateString
 "echo "commitNumber: ".commitNumber
 
 
-vsp 
+vsp window_name
 execute "read ! git show ".commitNumber.":".currentFileName
 redraw  
 execute "/".outputString
