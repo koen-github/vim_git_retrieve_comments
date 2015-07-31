@@ -30,3 +30,9 @@ endfunction
 
 noremap <F5> %
 noremap <F3> v% :call RetrieveOldComments()<CR>
+
+inoremap <F7> <C-R>=strftime("{\| y%Y_m%m_d%d \|}")<CR>
+inoremap <F8> <C-R>=strftime("{\| h%H_m%M_s%S \|}")<CR>
+inoremap <F9> <C-R>=strftime("{\| y%Y_m%m_d%d_h%H_m%M_s%S \|}")<CR>
+
+
