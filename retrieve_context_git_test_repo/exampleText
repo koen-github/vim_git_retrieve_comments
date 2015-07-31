@@ -1,0 +1,72 @@
+
+Often, when working on (plaintext) documents, while adding comments to them, the comments get “out of sync” with the document. That happens when the text in the document is updated, while the comment refers to a fragment which is destroyed/rewritten in the update. The comment, however, may still be important and relevant, among other things to investigate previously encountered problems that are still not solved, or to investigate the way a solution to a problem developed itself.
+
+\section{Assignment}
+
+Given a plaintext document, revision managed with git, which contains a datetime stamp D:
+
+[a lot of text]
+[text here]{| y2015_m04_d19_h15_m44_s49 |}[text here]
+[more text]
+
+[a lot of text]
+[text here]{| y2015_m05_d07_h15_m16_s49 |}Blablabla my first comment
+[more text]
+
+The previous comment doesn't make any sense, because I changed just the things I didn't want to.
+asdfasdf
+asdf
+asdf
+asdf
+asd
+
+[a lot of text]
+[text here]{| y2015_m05_d07_h15_m23_s49 |}Blablabla my secohjds comment
+[more text]
+
+
+[a lot of text]
+[text here]{| y2015_m05_d07_h15_m39_s49 |}Blablabla my driede comment
+[more text]
+
+fas
+dfas
+df
+
+Blablabla, just some random text to fill the minutes.
+
+Placing the cursor on the date-stamp, and pressing a certain key in gvim, will open a previous or next version (w.r.t. to the date under the cursor) of the text document using git. The version should:
+- have a commit date-time that directly follows/precedes the given date D.
+- should open in a new tab in the same gvim editor
+- should not close the original file
+At {| y2015_m05_d10_h14_m35_s02 |} Some text in the middle of something.
+asdfasdf
+asdfdfsa
+
+- should open the new document in read-only mode.
+- should place the cursor in exactly the same spot as in in the original document (or close to that location if that is not possible because the text where the cursor is located does not exist in the other version).
+
+At {| y2015_m04_d19_h15_m42_s02 |} text looks like:
+
+BEGIN PLAINTEXT DOC
+All birds can fly
+{  log
+   [{| y2015_m04_d19_h15_m42_s19 |} hmm, I'm not certain whether this statement is true]
+}
+END PLAINTEXT DOC
+
+
+
+At {| y2015_m04_d19_h15_m45_s00 |}: a git commit is done
+
+At {| y2015_m04_d19_h16_m43_s00 |} the text looks like
+
+BEGIN PLAINTEXT DOC
+Most birds can fly, but not all of them
+{  log
+   [{| y2015_m04_d19_h15_m42_s19 |} hmm, I'm not certain whether this statement is true]
+}
+END PLAINTEXT DOC
+
+
+
