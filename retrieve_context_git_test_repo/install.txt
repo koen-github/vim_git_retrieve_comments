@@ -1,0 +1,17 @@
+####How to install####
+
+Copy the plugin file vim_retrieve_context_comments.vim to your local vim plugin directory.
+
+You local plugin direcoty is most of the time located under: ~/.vim/plugin
+
+After you copied the file to your plugin directory;
+
+1. Locate your cursor to the last char of a timestamp, so for example if you have this as a timestamp: 
+
+{| y2015_m05_d07_h15_m16_s49 |}
+
+Your cursor must be located on top of the last } 
+
+2. Now press F5, you will see that the cursor will jump to the beginning of the timestamp, so the first bracket {
+
+3. Now Press F3, a new splitted vim window will open with the specified git commit timestamp.

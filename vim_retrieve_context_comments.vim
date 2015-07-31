@@ -9,18 +9,19 @@ endfunction
 
 function! RetrieveOldComments() 
 let line = s:get_visual_selection()
-let outputString = substitute(system("echo \"".line."\" | grep -Po '(?<=\\{\\|).*(?=\\|\\})'"), "\n*$", '', '')
-let dateString = substitute(system("date -d \"$(echo \"".outputString."\" | sed -e 's/_[h]/ /g' -e 's/[a-z]//g' -e 's/_/-/g' -e 's/-/:/3g')\""), "\n*$", '', '') 
+let outputString = substitute(system("echo \"".line."\" | grep -Po \"(?<=\\{\\|).*(?=\\|\\})\""), "\n*$", '', '')
+let dateString = substitute(system("date -d \"$(echo \"".outputString."\" | sed -e 's/_[h]/ /g' -e 's/[a-z]//g' -e 's/_/-/g' -e 's/-/:/3g')\" +%s"), "\n*$", '', '') 
 let currentFileName = expand('%:t')
-let commitNumber = substitute(system("git log --after=\"".dateString."\" --reverse | head -1 | sed 's/commit//g'"), "\n*$", '', '')
-let window_name = " ".currentFileName." ".commitNumber." "
+let commitNumber = substitute(system("git log --after=\"".dateString."\" --reverse | head -1 | sed 's/commit//g'"), '^\s*\(.\{-}\)\s*$', '\1', '')
+let window_name = " ".currentFileName."--".commitNumber
+"echo "LINE: ".line
 "echo "WINDOW NAME: ".window_name
 "echo "OUTPUT_STRING: ".outputString
 "echo "dateString: ".dateString
 "echo "commitNumber: ".commitNumber
 
 
-vsp window_name
+execute "vsp".window_name
 execute "read ! git show ".commitNumber.":".currentFileName
 redraw  
 execute "/".outputString
@@ -28,4 +29,4 @@ execute "/".outputString
 endfunction
 
 noremap <F5> %
-noremap <F4> v% :call RetrieveOldComments()<CR>
+noremap <F3> v% :call RetrieveOldComments()<CR>
